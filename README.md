@@ -1,6 +1,6 @@
 # Space Invaders
 
-![Space Invaders](url_to_your_project_image.png)
+![Space Invaders]
 
 ## Overview
 
@@ -19,9 +19,6 @@ Space Invaders is a classic arcade game where the player controls a spaceship to
 Include a link to a demo video or a playable version of the game if available.
 
 ## Screenshots
-
-![Screenshot 1](url_to_screenshot_1.png)
-![Screenshot 2](url_to_screenshot_2.png)
 
 ## Installation
 
