@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+
+canvas {
+  margin-left: 32%;
+  margin-top: 10%;
+}
