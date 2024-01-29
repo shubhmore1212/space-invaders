@@ -57,3 +57,7 @@ function enemySetup() {
     enemyList.push(enemy);
   }
 }
+
+function bossSetup() {
+  bossEnemy = new Enemy(300, 80, bossImage, 60, 30);
+}

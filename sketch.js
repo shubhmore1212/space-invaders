@@ -7,6 +7,7 @@ var fire = false;
 
 //aliens - enemy
 let enemyList = [];
+let bossEnemy;
 
 //score-pointer
 let score = 0;
@@ -31,6 +32,7 @@ function setup() {
   enemySetup();
   playerSetup();
   rocketSetup();
+  bossSetup();
 
   backgroundMusic.play();
 }
@@ -100,6 +102,15 @@ function game() {
   for (let i = 0; i < enemyList.length; i++) {
     image(enemyList[i].image, enemyList[i].xpos, enemyList[i].ypos, 30, 30);
   }
+
+  //boss-alien
+  image(
+    bossEnemy.image,
+    bossEnemy.xpos,
+    bossEnemy.ypos,
+    bossEnemy.width,
+    bossEnemy.height
+  );
 
   //headbar
   displayBoard();

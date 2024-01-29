@@ -1,6 +1,7 @@
 //multimedia;
-var playerImage;
-var enemyImage;
+let playerImage;
+let enemyImage;
+let bossImage;
 let fireSound;
 let shootSound;
 let titleFont;
@@ -9,7 +10,7 @@ let bodyFont;
 function preload() {
   playerImage = loadImage("asset/spaceship.png");
   enemyImage = loadImage("asset/invader.png");
-  console.log(playerImage);
+  bossImage = loadImage("asset/boss-alien.png");
   //fonts
   titleFont = loadFont("font/gabs_pixel.ttf");
   bodyFont = loadFont("font/rounded_pixel.ttf");
