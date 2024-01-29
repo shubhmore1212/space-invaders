@@ -80,14 +80,22 @@ function splash() {
 
 function displayBoard() {
   // score-board
-  //score
+  //live
   fill(0);
   textSize(25);
   textFont(titleFont);
-  text("Score:", 50, 35);
+  text("Lives:", 50, 20);
   textFont(bodyFont);
   textSize(35);
-  text(score, score.length > 3 ? 100 : 110, 35);
+  text(player.life, 110, 20);
+
+  //score
+  textSize(25);
+  textFont(titleFont);
+  text("Score:", 50, 45);
+  textFont(bodyFont);
+  textSize(35);
+  text(score, score.length > 3 ? 100 : 110, 45);
 
   //timer
   fill(0);

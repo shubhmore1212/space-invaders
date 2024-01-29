@@ -7,13 +7,22 @@ class GameObject {
 }
 
 class Player extends GameObject {
-  constructor(xpos, ypos, image, speed, width, height) {
+  constructor(xpos, ypos, image, speed, width, height, life) {
     super(xpos, ypos, image);
-    console.log("Image:", image);
     this.speed = speed;
     this.width = width;
     this.height = height;
+    this.life = life;
   }
+
+  collisionWithRocket = function (bossEnemy) {
+    if (bossEnemy.rocket.isCollision(this)) {
+      this.life--;
+      this.xpos = width / 2;
+      bossEnemy.rocket.currentPos = 2;
+      gameOverSound.play();
+    }
+  };
 }
 
 class Rocket extends GameObject {
@@ -24,6 +33,15 @@ class Rocket extends GameObject {
     this.height = height;
     this.currentPos = currentPos;
   }
+
+  isCollision = function (enemy) {
+    return (
+      this.xpos >= enemy.xpos - enemy.width / 2 &&
+      this.xpos <= enemy.xpos + enemy.width / 2 &&
+      this.ypos >= enemy.ypos - enemy.height / 2 &&
+      this.ypos <= enemy.ypos + enemy.height / 2
+    );
+  };
 }
 
 class Enemy extends GameObject {
@@ -34,13 +52,32 @@ class Enemy extends GameObject {
   }
 }
 
+class BossEnemy extends Enemy {
+  constructor(
+    xpos,
+    ypos,
+    image,
+    width,
+    height,
+    direction,
+    speed,
+    life,
+    rocket
+  ) {
+    super(xpos, ypos, image, width, height);
+    this.direction = direction;
+    this.speed = speed;
+    this.life = life;
+    this.rocket = rocket;
+  }
+}
+
 function playerSetup() {
-  player = new Player(300, 475, playerImage, 3, 60, 40);
-  console.log(player);
+  player = new Player(300, 475, playerImage, 3, 60, 40, 3);
 }
 
 function rocketSetup() {
-  rocket = new Rocket(player.xpos, player.ypos, enemyImage, 5, 7, 20, 0);
+  rocket = new Rocket(player.xpos, player.ypos, null, 5, 7, 20, 0);
 }
 
 function enemySetup() {
@@ -59,5 +96,15 @@ function enemySetup() {
 }
 
 function bossSetup() {
-  bossEnemy = new Enemy(300, 80, bossImage, 60, 30);
+  bossEnemy = new BossEnemy(
+    300,
+    90,
+    bossImage,
+    60,
+    30,
+    1,
+    2,
+    100,
+    new Rocket(300, 90, null, 3, 10, 10, 1)
+  );
 }

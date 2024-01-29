@@ -3,7 +3,7 @@ let player;
 
 //rocket
 let rocket;
-var fire = false;
+let fire = false;
 
 //aliens - enemy
 let enemyList = [];
@@ -21,7 +21,7 @@ let stage = 0;
 let totalTime;
 let splashTime;
 let gameTime;
-let timeLimit = 10;
+let timeLimit = 100;
 
 function setup() {
   createCanvas(600, 500);
@@ -111,38 +111,44 @@ function game() {
     bossEnemy.width,
     bossEnemy.height
   );
+  movementOfAlien(bossEnemy);
+
+  //boss rockets
+  //position 1 = in motion after firing
+  //position 2 = reset back to boss
+
+  //draw boss rocket
+  fill(255, 0, 0);
+  ellipse(bossEnemy.rocket.xpos, bossEnemy.rocket.ypos, 10);
+
+  //firing boss rockets
+  firingBossRockets(bossEnemy);
+
+  playerHittingBoss(rocket, bossEnemy);
+
+  //boss rocket collision witgh player
+  player.collisionWithRocket(bossEnemy);
+
+  //print health
+  textFont(bodyFont);
+  textSize(20);
+  fill(255, 0, 0);
+  text(bossEnemy.life, bossEnemy.xpos, bossEnemy.ypos - 20);
 
   //headbar
   displayBoard();
 
   //collision betn rockets and aliens
   for (let i = 0; i < enemyList.length; i++) {
-    if (
-      rocket.xpos >= enemyList[i].xpos - enemyList[i].width / 2 &&
-      rocket.xpos <= enemyList[i].xpos + enemyList[i].width / 2 &&
-      rocket.ypos >= enemyList[i].ypos - enemyList[i].height / 2 &&
-      rocket.ypos <= enemyList[i].ypos + enemyList[i].height / 2
-    ) {
+    if (rocket.isCollision(enemyList[i])) {
       //remove alien
       enemyList[i].xpos = -1000;
-      explosionSound.play();
-      rocket.currentPos = 2;
-      //add point
-      score = score + 1;
+      collisionWithEnemyEffect(rocket);
     }
   }
 
   //exiting stages
-  if (score >= 3) {
-    gameTime = gameTime; //stop game timer
-    stage = 2;
-    winSound.play();
-  }
-
-  if (gameTime >= timeLimit) {
-    stage = 3;
-    gameOverSound.play();
-  }
+  existingStages();
 }
 
 function rockets() {
@@ -150,29 +156,9 @@ function rockets() {
   //0 = with p1
   //1 = in motion after firing
   //2 = collision with object, return to p1
-  fill(26, 175, 255);
-  rect(rocket.xpos, rocket.ypos, rocket.width, rocket.height);
+  fill(255);
+  ellipse(rocket.xpos, rocket.ypos, 10);
 
   //fire rockets
-  if (fire && rocket.currentPos == 0) {
-    rocket.currentPos = 1;
-  }
-
-  if (rocket.currentPos == 1) {
-    rocket.xpos = rocket.xpos;
-    rocket.ypos = rocket.ypos - rocket.speed;
-
-    if (rocket.ypos <= 60) {
-      rocket.currentPos = 2;
-    }
-  } else {
-    rocket.ypos = rocket.ypos;
-    rocket.xpos = player.xpos;
-  }
-
-  if (rocket.currentPos == 2) {
-    rocket.xpos = player.xpos;
-    rocket.ypos = player.ypos;
-    rocket.currentPos = 0;
-  }
+  rocketStatus(rocket, player);
 }
