@@ -1,6 +1,6 @@
 # Space Invaders
 
-![Space Invaders]
+![image](https://github.com/shubhmore1212/space-invaders/assets/118346524/fb3911b4-1360-4930-b6c8-724f3562c0a8)
 
 ## Overview
 
@@ -16,9 +16,6 @@ Space Invaders is a classic arcade game where the player controls a spaceship to
 
 ## Demo
 
-Include a link to a demo video or a playable version of the game if available.
-
-## Screenshots
 
 ## Installation
 
@@ -26,3 +23,6 @@ Include a link to a demo video or a playable version of the game if available.
 
    ```bash
    git clone https://github.com/your-username/space-invaders.git
+   ```
+
+2. Play hard!
