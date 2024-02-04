@@ -14,9 +14,6 @@ Space Invaders is a classic arcade game where the player controls a spaceship to
 - Shooting mechanics
 - Score tracking
 
-## Demo
-
-
 ## Installation
 
 1. Clone the repository:
